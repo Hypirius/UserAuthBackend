@@ -1,6 +1,6 @@
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
-import prettier from "eslint-config-prettier";
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
 
 export default [
   // Base JS rules
@@ -13,10 +13,10 @@ export default [
   ...tseslint.configs.strict,
 
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     languageOptions: {
       parserOptions: {
-        project: "./tsconfig.json",
+        project: './tsconfig.json',
       },
     },
   },
@@ -26,8 +26,8 @@ export default [
 
   {
     rules: {
-      "no-console": "warn",
-      "@typescript-eslint/no-unused-vars": ["error"],
+      // "no-console": "warn",
+      '@typescript-eslint/no-unused-vars': ['error'],
     },
   },
 ];

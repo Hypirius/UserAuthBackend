@@ -10,6 +10,7 @@ interface configType {
   NODE_ENV: string;
   __dirname: string;
   __filename: string;
+  CORS_ORIGIN: string;
 }
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -21,13 +22,16 @@ dotenvConfig({
   path: path.join(__dirname, '../../', `.env.${NODE_ENV}.local`),
 });
 
+const PORT = Number(process.env.PORT) || 3000;
+
 const config: configType = {
-  PORT: Number(process.env.PORT) || 3000,
+  PORT,
   DB_NAME: process.env.DB_NAME || 'test',
   DB_URL: process.env.DB_URL || 'mongodb://localhost:27017',
   NODE_ENV,
   __dirname,
   __filename,
+  CORS_ORIGIN: process.env.CORS_ORIGIN || `https://localhost:${PORT}`,
 };
 
 export default Object.freeze(config);

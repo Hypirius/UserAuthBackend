@@ -11,6 +11,10 @@ interface configType {
   __dirname: string;
   __filename: string;
   CORS_ORIGIN: string;
+  JWT_ACCESS_SECRET: string;
+  JWT_REFRESH_SECRET: string;
+  JWT_REFRESH_DURATION_DAYS: number;
+  JWT_ACCESS_DURATION_MINS: number;
 }
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -32,6 +36,14 @@ const config: configType = {
   __dirname,
   __filename,
   CORS_ORIGIN: process.env.CORS_ORIGIN || `https://localhost:${PORT}`,
+  JWT_ACCESS_SECRET:
+    process.env.JWT_ACCESS_SECRET ||
+    Buffer.from('development-access-secret', 'utf8').toString('base64'),
+  JWT_REFRESH_SECRET:
+    process.env.JWT_ACCESS_SECRET ||
+    Buffer.from('development-refresh-secret', 'utf8').toString('base64'),
+  JWT_REFRESH_DURATION_DAYS: Number(process.env.JWT_REFRESH_DURATION_DAYS) || 7,
+  JWT_ACCESS_DURATION_MINS: Number(process.env.JWT_ACCESS_DURATION_MINS) || 30,
 };
 
 export default Object.freeze(config);

@@ -14,16 +14,19 @@ cloudinary.config({
   timeout: 15000,
 });
 
-const uploadOptions: UploadApiOptions = {
+const defaultUploadOptions: UploadApiOptions = {
   use_filename: true,
   unique_filename: false,
   overwrite: true,
   transformation: [{ quality: true }, { format: 'auto' }],
 };
 
-const uploadImage = async (imagePath: string) => {
+const uploadImage = async (imagePath: string, options: UploadApiOptions) => {
   try {
-    return await cloudinary.uploader.upload(imagePath, uploadOptions);
+    return await cloudinary.uploader.upload(imagePath, {
+      ...options,
+      ...defaultUploadOptions,
+    });
   } catch (error) {
     console.log(error);
     throw new ApiError(503, 'Unable to save image');
